@@ -1,0 +1,59 @@
+{
+  "tabs": {
+    "header": {
+      "focus": "Focus",
+      "short_break": "Short Break",
+      "long_break": "Long Break"
+    }
+  },
+  "buttons": {
+    "start": "Start",
+    "continue": "Continue",
+    "pause": "Pause",
+    "skip": "Skip",
+    "reset": "Reset"
+  },
+  "session": {
+    "session": "Session",
+    "of": "of",
+    "pomodoros_done": "Pomodoros completed",
+    "none_done": "You haven't completed any pomodoros yet"
+  },
+  "durations": {
+    "minutes": {
+      "1_MINUTE": "1 minute",
+      "2_MINUTES": "2 minutes",
+      "3_MINUTES": "3 minutes",
+      "4_MINUTES": "4 minutes",
+      "5_MINUTES": "5 minutes",
+      "6_MINUTES": "6 minutes",
+      "7_MINUTES": "7 minutes",
+      "8_MINUTES": "8 minutes",
+      "9_MINUTES": "9 minutes",
+      "10_MINUTES": "10 minutes",
+      "15_MINUTES": "15 minutes",
+      "20_MINUTES": "20 minutes",
+      "25_MINUTES": "25 minutes",
+      "30_MINUTES": "30 minutes",
+      "35_MINUTES": "35 minutes",
+      "40_MINUTES": "40 minutes",
+      "45_MINUTES": "45 minutes",
+      "50_MINUTES": "50 minutes",
+      "55_MINUTES": "55 minutes",
+      "60_MINUTES": "60 minutes"
+    },
+    "focus_duration": "Focus",
+    "short_break_duration": "Short Break",
+    "long_break_duration": "Long Break"
+  },
+  "settings": {
+    "progress_bar_style": {
+      "CIRCLE": "Circle",
+      "LINE": "Line",
+      "title": "Progress Bar Style"
+    },
+    "theme": {
+      "title": "Theme"
+    }
+  }
+}

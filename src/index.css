@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-background-muted: var(--background-muted);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-outline: var(--outline);
+}
+
+:root {
+  --background: oklch(0.9911 0 0);
+  --background-muted: oklch(0.9784 0.0055 269);
+  --foreground: oklch(0.2058 0.0139 240.44);
+  --foreground-muted: oklch(0.4058 0.0139 240.44);
+  --primary: oklch(0.5084 0.2217 291.02);
+  --primary-foreground: oklch(0.9716 0.0055 269);
+  --outline: oklch(0.8323 0.0018 247.84);
+}
+
+.dark {
+  --background: oklch(0.1808 0.0044 240.44);
+  --background-muted: oklch(0.2118 0.0055 269);
+  --foreground: oklch(0.9155 0.0081 240.44);
+  --foreground-muted: oklch(0.6058 0.0139 240.44);
+  --primary: oklch(0.6737 0.1929 294.29);
+  --primary-foreground: oklch(0.9716 0.0055 269);
+  --outline: oklch(0.4162 0.0051 249.51);
+}
