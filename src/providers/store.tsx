@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
   type ReactNode,
-  type RefObject,
+  type MutableRefObject,
 } from 'react'
 import {
   FOCUS_LENGTHS,
@@ -19,7 +19,7 @@ import {
   type Theme,
 } from '../types'
 
-const StoreContext = createContext<{
+type StoreContextType = {
   activeTab: Tab
   setActiveTab: (val: Tab) => void
   theme: Theme
@@ -41,13 +41,15 @@ const StoreContext = createContext<{
   time: number
   setTime: (val: number) => void
   start: (initialTime?: number) => void
-  intervalRef: RefObject<any>
-  remainingRef: RefObject<any>
+  intervalRef: MutableRefObject<number | null>
+  remainingRef: MutableRefObject<number>
   clearTimer: () => void
   setAutoStartMode: (val: boolean) => void
   progressStyle: ProgressBarStyle
   setProgressStyle: (val: ProgressBarStyle) => void
-}>(null)
+}
+
+const StoreContext = createContext<StoreContextType | null>(null)
 
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [activeTab, setActiveTab] = useState<Tab>(TABS_ENUM.FOCUS)
@@ -63,8 +65,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [totalSessions, setTotalSessions] = useState(4)
   const [isPaused, setIsPaused] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
-  const remainingRef = useRef(null)
-  const intervalRef = useRef(null)
+  const remainingRef = useRef<number>(0)
+  const intervalRef = useRef<number | null>(null)
   const [time, setTime] = useState(focusTime)
   const [autoStartMode, setAutoStartMode] = useState(true)
   const [progressStyle, setProgressStyle] = useState<ProgressBarStyle>(
@@ -72,8 +74,10 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   )
 
   const clearTimer = () => {
-    clearInterval(intervalRef.current)
-    intervalRef.current = null
+    if (intervalRef.current !== null) {
+      window.clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
   }
 
   const start = (initialTime = time) => {
@@ -84,7 +88,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     const initialRemaining = initialTime
     remainingRef.current = initialRemaining
 
-    intervalRef.current = setInterval(() => {
+    intervalRef.current = window.setInterval(() => {
       const elapsed = Date.now() - startedAt
       const next = Math.max(0, initialRemaining - elapsed)
       remainingRef.current = next
@@ -159,4 +163,12 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export const useGlobalContext = () => useContext(StoreContext)
+export const useGlobalContext = () => {
+  const context = useContext(StoreContext)
+
+  if (!context) {
+    throw new Error('useGlobalContext must be used within StoreProvider')
+  }
+
+  return context
+}
