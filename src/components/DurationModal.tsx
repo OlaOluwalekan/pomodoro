@@ -59,7 +59,7 @@ const DurationModal = ({
       onClick={onClose}
     >
       <div
-        className='w-[90%] bg-background p-4 rounded-md'
+        className='w-[90%] max-w-[600px] bg-background p-4 rounded-md'
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className='mb-3'>

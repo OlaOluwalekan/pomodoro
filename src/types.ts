@@ -73,3 +73,9 @@ export const PROGRESS_BAR_STYLES_ENUM = {
 
 export type ProgressBarStyle =
   (typeof PROGRESS_BAR_STYLES_ENUM)[keyof typeof PROGRESS_BAR_STYLES_ENUM]
+
+export interface ToastProps {
+  show: boolean
+  message: string
+  type: 'success' | 'error'
+}

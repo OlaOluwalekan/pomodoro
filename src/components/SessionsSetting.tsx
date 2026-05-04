@@ -7,7 +7,7 @@ const MAXIMUM_ALLOWABLE_SESSION = 10
 
 const SessionsSetting = () => {
   const { t } = useTranslation()
-  const { totalSessions, setTotalSessions } = useGlobalContext()
+  const { totalSessions, setTotalSessions, toast } = useGlobalContext()
   const [value, setValue] = useState(totalSessions)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,13 +29,25 @@ const SessionsSetting = () => {
   const handleIncrease = () => {
     if (value !== MAXIMUM_ALLOWABLE_SESSION) {
       setValue((prev) => prev + 1)
+      return
     }
+    toast.error(
+      t('settings.sessions.toasts.max_value_error', {
+        max: MAXIMUM_ALLOWABLE_SESSION,
+      }),
+    )
   }
 
   const handleDecrease = () => {
     if (value !== MINIMUM_ALLOWABLE_SESSION) {
       setValue((prev) => prev - 1)
+      return
     }
+    toast.error(
+      t('settings.sessions.toasts.min_value_error', {
+        min: MINIMUM_ALLOWABLE_SESSION,
+      }),
+    )
   }
 
   useEffect(() => {
