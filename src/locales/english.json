@@ -44,7 +44,8 @@
     },
     "focus_duration": "Focus",
     "short_break_duration": "Short Break",
-    "long_break_duration": "Long Break"
+    "long_break_duration": "Long Break",
+    "select_duration_for": "Select duration for"
   },
   "settings": {
     "progress_bar_style": {
@@ -54,6 +55,10 @@
     },
     "theme": {
       "title": "Theme"
+    },
+    "sessions": {
+      "title": "Sessions",
+      "description": "The number of sessions you want to complete before taking a long break"
     }
   }
 }
