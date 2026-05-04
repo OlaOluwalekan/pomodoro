@@ -17,6 +17,7 @@ import {
   type ProgressBarStyle,
   type Tab,
   type Theme,
+  type ToastProps,
 } from '../types'
 
 type StoreContextType = {
@@ -47,6 +48,11 @@ type StoreContextType = {
   setAutoStartMode: (val: boolean) => void
   progressStyle: ProgressBarStyle
   setProgressStyle: (val: ProgressBarStyle) => void
+  toastProps: ToastProps
+  toast: {
+    error: (msg: string) => void
+    success: (msg: string) => void
+  }
 }
 
 const StoreContext = createContext<StoreContextType | null>(null)
@@ -72,6 +78,32 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [progressStyle, setProgressStyle] = useState<ProgressBarStyle>(
     PROGRESS_BAR_STYLES_ENUM.LINE,
   )
+  const [toastProps, setToastProps] = useState<ToastProps>({
+    show: false,
+    message: '',
+    type: 'success',
+  })
+
+  const toast = () => {
+    const res = {
+      error: (msg: string) => {
+        setToastProps({
+          show: true,
+          message: msg,
+          type: 'error',
+        })
+      },
+      success: (msg: string) => {
+        setToastProps({
+          show: true,
+          message: msg,
+          type: 'success',
+        })
+      },
+    }
+
+    return res
+  }
 
   const clearTimer = () => {
     if (intervalRef.current !== null) {
@@ -100,6 +132,21 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
       }
     }, 16)
   }
+
+  useEffect(() => {
+    let timeout: number
+    if (toastProps.show) {
+      timeout = setTimeout(() => {
+        setToastProps({
+          show: false,
+          message: '',
+          type: 'success',
+        })
+      }, 3000)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [toastProps.show])
 
   useEffect(() => {
     const modeTime =
@@ -156,6 +203,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         setAutoStartMode,
         progressStyle,
         setProgressStyle,
+        toastProps,
+        toast: toast(),
       }}
     >
       {children}

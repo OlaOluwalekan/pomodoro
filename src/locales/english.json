@@ -58,7 +58,11 @@
     },
     "sessions": {
       "title": "Sessions",
-      "description": "The number of sessions you want to complete before taking a long break"
+      "description": "The number of sessions you want to complete before taking a long break",
+      "toasts": {
+        "min_value_error": "Minimum session is {{min}}",
+        "max_value_error": "Maximum session is {{max}}"
+      }
     }
   }
 }
