@@ -1,4 +1,5 @@
 import ProgressStyleSettings from './ProgressStyleSettings'
+import SessionsSetting from './SessionsSetting'
 import Theme from './Theme'
 
 const Settings = () => {
@@ -7,6 +8,8 @@ const Settings = () => {
       <Theme />
 
       <ProgressStyleSettings />
+
+      <SessionsSetting />
     </div>
   )
 }
